@@ -1,0 +1,30 @@
+{% extends 'website/base.html' %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<p>Welcome {{ request.user.username }}!</p>
+<a href="">LogOut</a>
+{% else %}
+<p></p>
+<h1>My To Do List</h1>
+<table border="1">
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Completed</th>
+    <th colspan="2"><a href="{% url 'create_task' %}">New</a></th>
+  </tr>
+  {% if tasks %}
+  {% for task in tasks %}
+  <tr>
+    <td><a href="{% url 'task' task.id %}">{{ task.title }}</a></td>
+    <td>{{ task.description }}</td>
+    <td>{% if task.completed %} Complete {% else %} Incomplete {% endif %}</td>
+    <td><a href="{% url 'update_task' task.id %}">Modify</a></td>
+    <td><a href="{% url 'delete_task' task.id %}">Delete</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>You have no tasks in your list.</p>
+{% endif %}
+{% endblock %}

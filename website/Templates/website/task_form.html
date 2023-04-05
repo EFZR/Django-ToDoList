@@ -1,12 +1,19 @@
 {% extends 'website/base.html' %}
 {% block content %}
-<h1>Task Form</h1>
-<form method="POST" action="">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-  </table>
-  <input type="submit" value="Save">
-</form>
-<a href="{% url 'tasks' %}">back</a>
+
+<div class="header-bar">
+  <a href="{% url 'tasks' %}">&#8592; Back</a>
+  <h1>Task Form</h1>
+</div>
+
+<div class="card-body">
+  <form method="POST" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="button" value="Save">
+  </form>
+  <a href="{% url 'tasks' %}">back</a>
+</div>
+
+
 {% endblock %}
